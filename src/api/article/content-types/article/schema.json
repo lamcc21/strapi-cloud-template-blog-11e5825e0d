@@ -13,11 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text",
-      "maxLength": 80
+      "maxLength": 200
     },
     "slug": {
       "type": "uid",
@@ -40,6 +41,26 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "articles"
+    },
+    "subject_tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subject-tag.subject-tag",
+      "mappedBy": "articles"
+    },
+    "article_type": {
+      "type": "enumeration",
+      "enum": ["BLOGS", "NEWS"],
+      "default": "BLOGS",
+      "required": true
+    },
+    "publish_date": {
+      "type": "date",
+      "required": true
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
     },
     "blocks": {
       "type": "dynamiczone",

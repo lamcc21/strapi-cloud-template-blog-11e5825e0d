@@ -1,11 +1,11 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "subject_tags",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "Category",
-    "description": "Organize your content into categories (Blogs, News, etc.)"
+    "singularName": "subject-tag",
+    "pluralName": "subject-tags",
+    "displayName": "Subject Tag",
+    "description": "Subject tags for articles (e.g., AI Orchestration, Healthcare, Technology)"
   },
   "options": {
     "draftAndPublish": false
@@ -21,12 +21,6 @@
       "type": "uid",
       "targetField": "name"
     },
-    "articles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::article.article",
-      "mappedBy": "category"
-    },
     "description": {
       "type": "text"
     },
@@ -34,9 +28,11 @@
       "type": "string",
       "regex": "^#[0-9A-Fa-f]{6}$"
     },
-    "order": {
-      "type": "integer",
-      "default": 0
+    "articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article",
+      "inversedBy": "subject_tags"
     }
   }
 }
