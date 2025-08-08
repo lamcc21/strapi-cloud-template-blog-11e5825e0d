@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "v1",
+    "title": "API Docs",
+    "description": ""
+  },
+  "x-strapi-config": {
+    "path": "/documentation"
+  }
+}
+
