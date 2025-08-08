@@ -30,23 +30,11 @@
       "required": false,
       "allowedTypes": ["images", "files", "videos"]
     },
-    "author": {
+    "subject": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::author.author",
+      "target": "api::subject.subject",
       "inversedBy": "articles"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "articles"
-    },
-    "subject_tags": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::subject-tag.subject-tag",
-      "mappedBy": "articles"
     },
     "article_type": {
       "type": "enumeration",
