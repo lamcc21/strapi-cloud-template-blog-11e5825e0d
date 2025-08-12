@@ -42,10 +42,6 @@
       "type": "date",
       "required": true
     },
-    "featured": {
-      "type": "boolean",
-      "default": false
-    },
     "content": {
       "type": "richtext",
       "required": true
