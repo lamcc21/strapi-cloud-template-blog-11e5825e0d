@@ -50,9 +50,9 @@
       "type": "boolean",
       "default": false
     },
-    "blocks": {
-      "type": "dynamiczone",
-      "components": ["shared.media", "shared.quote", "shared.rich-text", "shared.slider"]
+    "content": {
+      "type": "richtext",
+      "required": false
     }
   }
 }
