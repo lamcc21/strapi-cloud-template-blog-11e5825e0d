@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "text",
-      "maxLength": 200
-    },
     "slug": {
       "type": "uid",
       "targetField": "title"
@@ -52,7 +48,7 @@
     },
     "content": {
       "type": "richtext",
-      "required": false
+      "required": true
     }
   }
 }
