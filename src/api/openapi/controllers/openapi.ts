@@ -8,7 +8,7 @@ const docsRoot = (strapi: Core.Strapi) =>
 const pickLatestVersion = async (root: string) => {
   const entries = await fs.readdir(root, { withFileTypes: true });
   const versions = entries
-    .filter(d => d.isDirectory() && /^v\d+\.\d+\.\d+$/.test(d.name))
+    .filter(d => d.isDirectory() && /^(v)?\d+\.\d+\.\d+$/.test(d.name))
     .map(d => d.name)
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
   return versions.at(-1);
