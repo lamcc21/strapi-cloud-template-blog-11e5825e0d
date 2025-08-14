@@ -18,25 +18,24 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
+    },
+    "section": {
+      "type": "enumeration",
+      "enum": ["platform", "solutions", "insights", "company"],
+      "required": true,
+      "default": "insights"
     },
     "cover": {
       "type": "media",
       "multiple": false,
-      "required": false,
-      "allowedTypes": ["images", "files", "videos"]
+      "required": true,
+      "allowedTypes": ["images"]
     },
-    "subject": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::subject.subject",
-      "inversedBy": "articles"
-    },
-    "article_type": {
-      "type": "enumeration",
-      "enum": ["BLOGS", "NEWS"],
-      "default": "BLOGS",
-      "required": true
+    "section_meta": {
+      "type": "dynamiczone",
+      "components": ["shared.insights-meta"]
     },
     "publish_date": {
       "type": "date",
@@ -44,7 +43,8 @@
     },
     "content": {
       "type": "richtext",
-      "required": true
+      "required": true,
+      "minLength": 1000
     }
   }
 }
