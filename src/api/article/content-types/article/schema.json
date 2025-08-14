@@ -33,9 +33,16 @@
       "required": true,
       "allowedTypes": ["images"]
     },
-    "section_meta": {
-      "type": "dynamiczone",
-      "components": ["shared.insights-meta"]
+    "subject": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::subject.subject"
+    },
+    "article_type": {
+      "type": "enumeration",
+      "enum": ["BLOGS", "NEWS", "POST"],
+      "default": "POST",
+      "required": true
     },
     "publish_date": {
       "type": "date",
