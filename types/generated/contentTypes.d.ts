@@ -410,7 +410,7 @@ export interface ApiAnnouncementBannerAnnouncementBanner
   extends Struct.SingleTypeSchema {
   collectionName: 'announcement_banners';
   info: {
-    description: 'Manages the announcement banner displayed on the homepage';
+    description: 'Manages the announcement banner text displayed on the homepage';
     displayName: 'Announcement Banner';
     pluralName: 'announcement-banners';
     singularName: 'announcement-banner';
@@ -419,20 +419,9 @@ export interface ApiAnnouncementBannerAnnouncementBanner
     draftAndPublish: true;
   };
   attributes: {
-    buttonLink: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'/book-demo'>;
-    buttonText: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 50;
-      }> &
-      Schema.Attribute.DefaultTo<'BOOK A DEMO'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    enabled: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    isNew: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -472,7 +461,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1000;
       }>;
-    cover: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
