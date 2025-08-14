@@ -17,7 +17,8 @@
     "subject": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::subject.subject"
+      "target": "api::subject.subject",
+      "required": true
     }
   }
 }
