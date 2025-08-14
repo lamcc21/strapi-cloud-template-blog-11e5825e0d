@@ -1,0 +1,48 @@
+{
+  "kind": "singleType",
+  "collectionName": "announcement_banners",
+  "info": {
+    "singularName": "announcement-banner",
+    "pluralName": "announcement-banners",
+    "displayName": "Announcement Banner",
+    "description": "Manages the announcement banner displayed on the homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "required": true,
+      "description": "Toggle to show or hide the announcement banner"
+    },
+    "isNew": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": "Shows the NEW! badge when enabled"
+    },
+    "text": {
+      "type": "text",
+      "required": true,
+      "maxLength": 500,
+      "description": "The main announcement message",
+      "default": "Orchestral HIP just got better-with connectors to internal tools, MCP support, record mode & SSO to Team, and flexible pricing!"
+    },
+    "buttonText": {
+      "type": "string",
+      "required": false,
+      "default": "BOOK A DEMO",
+      "maxLength": 50,
+      "description": "Text displayed on the CTA button"
+    },
+    "buttonLink": {
+      "type": "string",
+      "required": false,
+      "default": "/book-demo",
+      "description": "URL the button links to"
+    }
+  }
+}

@@ -1,11 +1,11 @@
 {
   "kind": "singleType",
-  "collectionName": "platforms",
+  "collectionName": "ai_accelerators",
   "info": {
-    "singularName": "platform",
-    "pluralName": "platforms",
-    "displayName": "Platform",
-    "description": "Single page content for the platform page"
+    "singularName": "ai-accelerator",
+    "pluralName": "ai-accelerators",
+    "displayName": "AI Accelerator",
+    "description": "Single page content for the AI accelerator page"
   },
   "options": {
     "draftAndPublish": true
@@ -15,7 +15,7 @@
     "title": {
       "type": "string",
       "required": true,
-      "default": "Platform"
+      "default": "AI Accelerator"
     },
     "content": {
       "type": "richtext"
