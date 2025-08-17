@@ -28,7 +28,7 @@
     },
     "color": {
       "type": "string",
-      "regex": "^#[0-9A-Fa-f]{6}$"
+      "customField": "plugin::color-picker.color"
     },
     "order": {
       "type": "integer",
