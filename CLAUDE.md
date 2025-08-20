@@ -5,11 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 ### Essential Commands
-- `npm run develop` - Start development server with autoReload enabled
-- `npm run start` - Start production server with autoReload disabled  
-- `npm run build` - Build the admin panel for production
-- `npm run deploy` - Deploy to Strapi Cloud
-- `npm run seed:example` - Seed the database with example data (articles, authors, categories)
+- `pnpm run develop` - Start development server with autoReload enabled
+- `pnpm run start` - Start production server with autoReload disabled
+- `pnpm run build` - Build the admin panel for production
+- `pnpm run deploy` - Deploy to Strapi Cloud
+- `pnpm run seed:example` - Seed the database with example data (articles, authors, categories)
 
 ### Database Seeding
 The project includes a comprehensive seeding system in `scripts/seed.js`. The seed script:
@@ -17,7 +17,7 @@ The project includes a comprehensive seeding system in `scripts/seed.js`. The se
 - Creates sample blog content (articles, authors, categories, global settings, about page)
 - Handles file uploads for images and media
 - Sets up public permissions for content types
-- Can be run manually via `npm run seed:example`
+- Can be run manually via `pnpm run seed:example`
 
 ## Architecture Overview
 
@@ -29,13 +29,6 @@ This is a **Strapi v5 headless CMS** configured as a blog template with:
 - **Categories**: Content classification system
 - **Global**: Site-wide settings including SEO defaults and favicon
 - **About**: Static about page with dynamic content blocks
-
-### Dynamic Content System
-Uses Strapi's **dynamic zones** for flexible content blocks:
-- `shared.media` - Single file/image/video uploads
-- `shared.quote` - Quote blocks for testimonials
-- `shared.rich-text` - WYSIWYG content areas  
-- `shared.slider` - Multi-image carousels
 
 ### Database Configuration
 - **Default**: SQLite (file-based, stored in `.tmp/data.db`)
@@ -57,7 +50,7 @@ The application runs a bootstrap function on startup (`src/bootstrap.js`) that:
 
 ### Key Relationships
 - Articles → Authors (many-to-one)
-- Articles → Categories (many-to-one)  
+- Articles → Categories (many-to-one)
 - Articles → Dynamic Blocks (one-to-many via dynamic zone)
 - All content types support draft/publish workflow
 
