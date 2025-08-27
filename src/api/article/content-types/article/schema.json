@@ -52,6 +52,25 @@
       "type": "richtext",
       "required": true,
       "minLength": 1000
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "articles"
+    },
+    "seo_metatitle": {
+      "type": "string"
+    },
+    "seo_metadescription": {
+      "type": "text"
+    },
+    "menu_title": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
