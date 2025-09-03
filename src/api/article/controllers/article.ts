@@ -8,27 +8,28 @@ export default factories.createCoreController('api::article.article', ({ strapi 
   async create(ctx) {
     const { data } = ctx.request.body;
     
-    // Validate section is provided
-    if (!data.section) {
-      return ctx.badRequest('Section is required');
-    }
-    
-    // Get section details
-    const section = await strapi.entityService.findOne('api::section.section', data.section, {
-      fields: ['slug']
-    });
-    
-    if (!section) {
-      return ctx.badRequest('Invalid section selected');
-    }
-    
-    // Validation for insights section (Know How)
-    if (section.slug === 'know-how' && !data.subject) {
-      return ctx.badRequest('Subject is required for Know How articles');
-    }
-    
-    // Clear subject for non-insights articles
-    if (section.slug !== 'know-how') {
+    // If section is provided, validate it
+    if (data.section) {
+      // Get section details
+      const section = await strapi.entityService.findOne('api::section.section', data.section, {
+        fields: ['slug']
+      });
+      
+      if (!section) {
+        return ctx.badRequest('Invalid section selected');
+      }
+      
+      // Validation for insights section (Know How)
+      if (section.slug === 'know-how' && !data.subject) {
+        return ctx.badRequest('Subject is required for Know How articles');
+      }
+      
+      // Clear subject for non-insights articles
+      if (section.slug !== 'know-how') {
+        data.subject = null;
+      }
+    } else {
+      // Standalone articles don't have sections - clear subject
       data.subject = null;
     }
     
@@ -45,22 +46,28 @@ export default factories.createCoreController('api::article.article', ({ strapi 
     
     if (data) {
       // If section is being updated, validate it
-      if (data.section) {
-        const section = await strapi.entityService.findOne('api::section.section', data.section, {
-          fields: ['slug']
-        });
-        
-        if (!section) {
-          return ctx.badRequest('Invalid section selected');
-        }
-        
-        // Validation for insights section (Know How)
-        if (section.slug === 'know-how' && data.subject === null) {
-          return ctx.badRequest('Subject is required for Know How articles');
-        }
-        
-        // Clear subject for non-insights articles
-        if (section.slug !== 'know-how') {
+      if (data.section !== undefined) {
+        if (data.section) {
+          // Section is being set to a value
+          const section = await strapi.entityService.findOne('api::section.section', data.section, {
+            fields: ['slug']
+          });
+          
+          if (!section) {
+            return ctx.badRequest('Invalid section selected');
+          }
+          
+          // Validation for insights section (Know How)
+          if (section.slug === 'know-how' && data.subject === null) {
+            return ctx.badRequest('Subject is required for Know How articles');
+          }
+          
+          // Clear subject for non-insights articles
+          if (section.slug !== 'know-how') {
+            data.subject = null;
+          }
+        } else {
+          // Section is being cleared (set to null) - make it standalone
           data.subject = null;
         }
       }
