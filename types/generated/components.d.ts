@@ -3,13 +3,12 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface NavigationArticleLink extends Struct.ComponentSchema {
   collectionName: 'components_navigation_article_links';
   info: {
-    description: 'A navigation link that references an article with optional custom path';
+    description: 'A navigation link that references a standalone article';
     displayName: 'Article Link';
   };
   attributes: {
     article: Schema.Attribute.Relation<'oneToOne', 'api::article.article'> &
       Schema.Attribute.Required;
-    custom_path: Schema.Attribute.String;
     order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
   };
 }
