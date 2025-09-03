@@ -3,4 +3,7 @@ export default () => ({
   'color-picker': {
     enabled: true,
   },
+  superfields: {
+    enabled: true,
+  },
 });
