@@ -22,10 +22,10 @@
       "required": true
     },
     "section": {
-      "type": "enumeration",
-      "enum": ["platform", "solutions", "insights", "company"],
-      "required": true,
-      "default": "insights"
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::section.section",
+      "inversedBy": "articles"
     },
     "cover": {
       "type": "media",

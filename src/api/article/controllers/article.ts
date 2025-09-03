@@ -8,13 +8,27 @@ export default factories.createCoreController('api::article.article', ({ strapi 
   async create(ctx) {
     const { data } = ctx.request.body;
     
-    // Simple validation for insights articles
-    if (data.section === 'insights' && !data.subject) {
-      return ctx.badRequest('Subject is required for insights articles');
+    // Validate section is provided
+    if (!data.section) {
+      return ctx.badRequest('Section is required');
+    }
+    
+    // Get section details
+    const section = await strapi.entityService.findOne('api::section.section', data.section, {
+      fields: ['slug']
+    });
+    
+    if (!section) {
+      return ctx.badRequest('Invalid section selected');
+    }
+    
+    // Validation for insights section (Know How)
+    if (section.slug === 'know-how' && !data.subject) {
+      return ctx.badRequest('Subject is required for Know How articles');
     }
     
     // Clear subject for non-insights articles
-    if (data.section !== 'insights') {
+    if (section.slug !== 'know-how') {
       data.subject = null;
     }
     
@@ -30,14 +44,25 @@ export default factories.createCoreController('api::article.article', ({ strapi 
     const { data } = ctx.request.body;
     
     if (data) {
-      // Simple validation for insights articles
-      if (data.section === 'insights' && data.subject === null) {
-        return ctx.badRequest('Subject is required for insights articles');
-      }
-      
-      // Clear subject for non-insights articles
-      if (data.section && data.section !== 'insights') {
-        data.subject = null;
+      // If section is being updated, validate it
+      if (data.section) {
+        const section = await strapi.entityService.findOne('api::section.section', data.section, {
+          fields: ['slug']
+        });
+        
+        if (!section) {
+          return ctx.badRequest('Invalid section selected');
+        }
+        
+        // Validation for insights section (Know How)
+        if (section.slug === 'know-how' && data.subject === null) {
+          return ctx.badRequest('Subject is required for Know How articles');
+        }
+        
+        // Clear subject for non-insights articles
+        if (section.slug !== 'know-how') {
+          data.subject = null;
+        }
       }
       
       // Validate content length if content is being updated

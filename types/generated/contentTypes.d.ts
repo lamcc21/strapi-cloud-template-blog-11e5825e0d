@@ -475,11 +475,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     publish_date: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    section: Schema.Attribute.Enumeration<
-      ['platform', 'solutions', 'insights', 'company']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'insights'>;
+    section: Schema.Attribute.Relation<'manyToOne', 'api::section.section'>;
     seo_metadescription: Schema.Attribute.Text;
     seo_metatitle: Schema.Attribute.String;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -516,6 +512,40 @@ export interface ApiFeaturedArticleFeaturedArticle
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSectionSection extends Struct.CollectionTypeSchema {
+  collectionName: 'sections';
+  info: {
+    description: 'Navigation sections for organizing articles';
+    displayName: 'Section';
+    pluralName: 'sections';
+    singularName: 'section';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::section.section'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1102,6 +1132,7 @@ declare module '@strapi/strapi' {
       'api::announcement-banner.announcement-banner': ApiAnnouncementBannerAnnouncementBanner;
       'api::article.article': ApiArticleArticle;
       'api::featured-article.featured-article': ApiFeaturedArticleFeaturedArticle;
+      'api::section.section': ApiSectionSection;
       'api::subject.subject': ApiSubjectSubject;
       'api::tag.tag': ApiTagTag;
       'plugin::content-releases.release': PluginContentReleasesRelease;
