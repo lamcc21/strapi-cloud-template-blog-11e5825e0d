@@ -2,7 +2,7 @@
   "collectionName": "components_navigation_article_links",
   "info": {
     "displayName": "Article Link",
-    "description": "A navigation link that references an article with optional custom path"
+    "description": "A navigation link that references a standalone article"
   },
   "options": {},
   "attributes": {
@@ -12,10 +12,6 @@
       "target": "api::article.article",
       "required": true,
       "description": "Select a standalone article to include in the dropdown"
-    },
-    "custom_path": {
-      "type": "string",
-      "description": "Optional custom URL path (e.g., 'insights/ai-accelerator'). If empty, uses '/article-slug'"
     },
     "order": {
       "type": "integer",
