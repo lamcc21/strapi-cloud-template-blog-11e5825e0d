@@ -1,4 +1,4 @@
-// import type { Core } from '@strapi/strapi';
+import type { Core } from '@strapi/strapi';
 
 export default {
   /**
@@ -16,5 +16,34 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    // Auto-seed sections on startup
+    try {
+      const count = await strapi.entityService.count('api::section.section');
+      
+      if (count === 0) {
+        console.log('🌱 Seeding initial sections...');
+        
+        const sections = [
+          { name: 'Platform', slug: 'platform', order: 1 },
+          { name: 'Solutions', slug: 'solutions', order: 2 },
+          { name: 'Know How', slug: 'know-how', order: 3 },
+          { name: 'Company', slug: 'company', order: 4 }
+        ];
+        
+        for (const section of sections) {
+          await strapi.entityService.create('api::section.section', {
+            data: section
+          });
+          console.log(`✅ Created section: ${section.name}`);
+        }
+        
+        console.log('🎉 Section seeding completed!');
+      } else {
+        console.log(`✅ Sections already exist (${count} found)`);
+      }
+    } catch (error) {
+      console.error('❌ Error seeding sections:', error);
+    }
+  },
 };
