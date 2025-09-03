@@ -476,8 +476,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     publish_date: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     section: Schema.Attribute.Relation<'manyToOne', 'api::section.section'>;
-    seo_metadescription: Schema.Attribute.Text;
-    seo_metatitle: Schema.Attribute.String;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     subject: Schema.Attribute.Relation<'oneToOne', 'api::subject.subject'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
@@ -509,6 +508,35 @@ export interface ApiFeaturedArticleFeaturedArticle
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::featured-article.featured-article'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiKnowHowLinksKnowHowLinks extends Struct.SingleTypeSchema {
+  collectionName: 'know_how_links';
+  info: {
+    description: 'Manage the dropdown links in the Know How navigation section';
+    displayName: 'Know How Links';
+    pluralName: 'know-how-links-list';
+    singularName: 'know-how-links';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    links: Schema.Attribute.Component<'navigation.article-link', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::know-how-links.know-how-links'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -856,6 +884,43 @@ export interface PluginReviewWorkflowsWorkflowStage
   };
 }
 
+export interface PluginSuperfieldsColor extends Struct.CollectionTypeSchema {
+  collectionName: 'colors';
+  info: {
+    displayName: 'color';
+    pluralName: 'colors';
+    singularName: 'color';
+  };
+  options: {
+    comment: '';
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hex: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::superfields.color'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -1132,6 +1197,7 @@ declare module '@strapi/strapi' {
       'api::announcement-banner.announcement-banner': ApiAnnouncementBannerAnnouncementBanner;
       'api::article.article': ApiArticleArticle;
       'api::featured-article.featured-article': ApiFeaturedArticleFeaturedArticle;
+      'api::know-how-links.know-how-links': ApiKnowHowLinksKnowHowLinks;
       'api::section.section': ApiSectionSection;
       'api::subject.subject': ApiSubjectSubject;
       'api::tag.tag': ApiTagTag;
@@ -1140,6 +1206,7 @@ declare module '@strapi/strapi' {
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
       'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;
+      'plugin::superfields.color': PluginSuperfieldsColor;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

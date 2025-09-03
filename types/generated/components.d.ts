@@ -1,5 +1,19 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface NavigationArticleLink extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_article_links';
+  info: {
+    description: 'A navigation link that references an article with optional custom path';
+    displayName: 'Article Link';
+  };
+  attributes: {
+    article: Schema.Attribute.Relation<'oneToOne', 'api::article.article'> &
+      Schema.Attribute.Required;
+    custom_path: Schema.Attribute.String;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -65,6 +79,7 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'navigation.article-link': NavigationArticleLink;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

@@ -19,13 +19,15 @@
     "slug": {
       "type": "uid",
       "targetField": "title",
-      "required": true
+      "required": true,
+      "description": "URL-friendly version of the title (auto-generated)"
     },
     "section": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::section.section",
-      "inversedBy": "articles"
+      "inversedBy": "articles",
+      "description": "Select a navigation section for this article. Leave empty for standalone articles that won't appear in navigation menus."
     },
     "cover": {
       "type": "media",
@@ -36,13 +38,15 @@
     "subject": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::subject.subject"
+      "target": "api::subject.subject",
+      "description": "Required for Know How articles only. Select the topic category for this article."
     },
     "article_type": {
       "type": "enumeration",
       "enum": ["BLOGS", "NEWS", "POST"],
       "default": "POST",
-      "required": true
+      "required": true,
+      "description": "Content classification: BLOGS for blog posts, NEWS for news items, POST for general content"
     },
     "publish_date": {
       "type": "date",
@@ -59,18 +63,19 @@
       "target": "api::tag.tag",
       "inversedBy": "articles"
     },
-    "seo_metatitle": {
-      "type": "string"
-    },
-    "seo_metadescription": {
-      "type": "text"
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
     },
     "menu_title": {
-      "type": "string"
+      "type": "string",
+      "description": "Optional shorter title for dropdown menus. If empty, the main title will be used."
     },
     "order": {
       "type": "integer",
-      "default": 0
+      "default": 0,
+      "description": "Display position within the section's dropdown menu. Lower numbers appear first."
     }
   }
 }

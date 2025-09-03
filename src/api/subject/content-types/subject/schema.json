@@ -15,7 +15,8 @@
     "name": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "description": "Subject category name (e.g., AI Orchestration, Healthcare)"
     },
     "articles": {
       "type": "relation",
@@ -24,15 +25,18 @@
       "mappedBy": "subject"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "description": "Brief explanation of what this subject covers"
     },
     "color": {
       "type": "string",
-      "customField": "plugin::color-picker.color"
+      "customField": "plugin::color-picker.color",
+      "description": "Color used for visual identification of this subject"
     },
     "order": {
       "type": "integer",
-      "default": 0
+      "default": 0,
+      "description": "Display order when showing subjects. Lower numbers appear first."
     }
   }
 }

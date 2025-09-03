@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "know_how_links",
+  "info": {
+    "singularName": "know-how-links",
+    "pluralName": "know-how-links-list",
+    "displayName": "Know How Links",
+    "description": "Manage the dropdown links in the Know How navigation section"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "component": "navigation.article-link",
+      "repeatable": true,
+      "description": "Articles to display in the Know How dropdown menu"
+    }
+  }
+}
