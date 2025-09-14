@@ -24,7 +24,12 @@ export default {
       if (count === 0) {
         console.log('🌱 Seeding initial sections...');
         
-        const sections = [
+        const sections: Array<{
+          name: string;
+          slug: string;
+          order: number;
+          path: 'company' | 'knowledge' | 'platform' | 'solutions';
+        }> = [
           { name: 'Platform', slug: 'platform', order: 1, path: 'platform' },
           { name: 'Solutions', slug: 'solutions', order: 2, path: 'solutions' },
           { name: 'Know How', slug: 'knowledge', order: 3, path: 'knowledge' },
