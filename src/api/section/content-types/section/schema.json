@@ -34,6 +34,12 @@
       "relation": "oneToMany",
       "target": "api::article.article",
       "mappedBy": "section"
+    },
+    "path": {
+      "type": "enumeration",
+      "enum": ["company", "knowledge", "platform", "solutions"],
+      "required": true,
+      "description": "Navigation path category for this section"
     }
   }
 }
