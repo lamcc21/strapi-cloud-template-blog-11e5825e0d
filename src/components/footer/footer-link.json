@@ -11,10 +11,10 @@
       "required": true,
       "description": "Link display text"
     },
-    "link": {
+    "slug": {
       "type": "string",
-      "required": true,
-      "description": "Internal page URL"
+      "required": false,
+      "description": "Page slug for internal navigation"
     }
   }
 }
