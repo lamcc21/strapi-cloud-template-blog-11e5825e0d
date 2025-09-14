@@ -25,10 +25,10 @@ export default {
         console.log('🌱 Seeding initial sections...');
         
         const sections = [
-          { name: 'Platform', slug: 'platform', order: 1 },
-          { name: 'Solutions', slug: 'solutions', order: 2 },
-          { name: 'Know How', slug: 'know-how', order: 3 },
-          { name: 'Company', slug: 'company', order: 4 }
+          { name: 'Platform', slug: 'platform', order: 1, path: 'platform' },
+          { name: 'Solutions', slug: 'solutions', order: 2, path: 'solutions' },
+          { name: 'Know How', slug: 'knowledge', order: 3, path: 'knowledge' },
+          { name: 'Company', slug: 'company', order: 4, path: 'company' }
         ];
         
         for (const section of sections) {
