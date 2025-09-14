@@ -7,7 +7,7 @@ export interface FooterFooterLink extends Struct.ComponentSchema {
     displayName: 'Footer Link';
   };
   attributes: {
-    link: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
