@@ -1,5 +1,17 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface FooterFooterLink extends Struct.ComponentSchema {
+  collectionName: 'components_footer_footer_links';
+  info: {
+    description: 'A link item for the footer navigation';
+    displayName: 'Footer Link';
+  };
+  attributes: {
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface NavigationArticleLink extends Struct.ComponentSchema {
   collectionName: 'components_navigation_article_links';
   info: {
@@ -78,6 +90,7 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'footer.footer-link': FooterFooterLink;
       'navigation.article-link': NavigationArticleLink;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;

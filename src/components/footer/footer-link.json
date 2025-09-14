@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_footer_footer_links",
+  "info": {
+    "displayName": "Footer Link",
+    "description": "A link item for the footer navigation"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Link display text"
+    },
+    "link": {
+      "type": "string",
+      "required": true,
+      "description": "Internal page URL"
+    }
+  }
+}

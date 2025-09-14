@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Job",
+    "description": "Job postings for the company"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Job title"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"],
+      "description": "Cover image for the job posting"
+    },
+    "link": {
+      "type": "string",
+      "required": true,
+      "description": "External link to the job posting"
+    },
+    "publish_date": {
+      "type": "date",
+      "required": true,
+      "description": "Date when the job was published"
+    },
+    "job_type": {
+      "type": "enumeration",
+      "enum": ["Sales", "Other", "Engineering"],
+      "required": true,
+      "description": "Type of job position"
+    }
+  }
+}
