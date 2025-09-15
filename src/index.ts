@@ -19,7 +19,7 @@ export default {
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     // Auto-seed sections on startup
     try {
-      const cfg = strapi.config.get("plugin.upload") as any;
+      const cfg = strapi.config.get("plugin::upload") as any; // <-- not 'plugin.upload'
       strapi.log.info(`Upload provider: ${cfg?.config?.provider}`);
       strapi.log.info(
         `Upload baseUrl: ${cfg?.config?.providerOptions?.baseUrl}`,
