@@ -1,4 +1,4 @@
-export default ({ env }) => ({
+module.exports = ({ env }) => ({
   documentation: { enabled: true },
   "color-picker": {
     enabled: true,
