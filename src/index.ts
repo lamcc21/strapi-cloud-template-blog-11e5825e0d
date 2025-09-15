@@ -20,10 +20,21 @@ export default {
     // Auto-seed sections on startup
     try {
       const uploadPlugin = strapi.plugin("upload");
-      const uploadConfig = uploadPlugin?.config as any;
-      strapi.log.info(`Upload provider: ${uploadConfig?.provider}`);
+      const uploadService = uploadPlugin?.service("upload");
+      const provider = uploadService?.provider;
+
+      strapi.log.info(`Upload provider loaded: ${provider ? "Yes" : "No"}`);
       strapi.log.info(
-        `Upload baseUrl: ${uploadConfig?.providerOptions?.baseUrl}`,
+        `Upload provider type: ${provider?.constructor?.name || "Unknown"}`,
+      );
+
+      // Check the actual config from strapi.config
+      const pluginConfig = strapi.config.get("plugin.upload") as any;
+      strapi.log.info(
+        `Upload config provider: ${pluginConfig?.config?.provider}`,
+      );
+      strapi.log.info(
+        `Upload config baseUrl: ${pluginConfig?.config?.providerOptions?.baseUrl}`,
       );
 
       const count = await strapi.entityService.count("api::section.section");
