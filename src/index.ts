@@ -19,23 +19,30 @@ export default {
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     // Auto-seed sections on startup
     try {
+      // Debug all plugin configurations
+      const allPlugins = strapi.config.get("plugin");
+      strapi.log.info(`All plugin configs: ${JSON.stringify(Object.keys(allPlugins || {}))}`);
+
+      // Try different ways to access upload config
+      const uploadConfig1 = strapi.config.get("plugin.upload") as any;
+      const uploadConfig2 = strapi.config.get("plugin::upload") as any;
+      const uploadConfig3 = allPlugins as any;
+
+      strapi.log.info(`Config method 1 (plugin.upload): ${JSON.stringify(uploadConfig1?.config?.provider)}`);
+      strapi.log.info(`Config method 2 (plugin::upload): ${JSON.stringify(uploadConfig2?.config?.provider)}`);
+      strapi.log.info(`Config method 3 (allPlugins.upload): ${JSON.stringify(uploadConfig3?)}`);
+
+      // Check if the upload plugin itself is loaded
       const uploadPlugin = strapi.plugin("upload");
-      const uploadService = uploadPlugin?.service("upload");
-      const provider = uploadService?.provider;
+      strapi.log.info(`Upload plugin exists: ${!!uploadPlugin}`);
 
-      strapi.log.info(`Upload provider loaded: ${provider ? "Yes" : "No"}`);
-      strapi.log.info(
-        `Upload provider type: ${provider?.constructor?.name || "Unknown"}`,
-      );
-
-      // Check the actual config from strapi.config
-      const pluginConfig = strapi.config.get("plugin::upload") as any;
-      strapi.log.info(
-        `Upload config provider: ${pluginConfig?.config?.provider}`,
-      );
-      strapi.log.info(
-        `Upload config baseUrl: ${pluginConfig?.config?.providerOptions?.baseUrl}`,
-      );
+      if (uploadPlugin) {
+        const uploadService = uploadPlugin.service("upload");
+        const provider = uploadService?.provider;
+        strapi.log.info(`Upload service exists: ${!!uploadService}`);
+        strapi.log.info(`Upload provider loaded: ${provider ? "Yes" : "No"}`);
+        strapi.log.info(`Upload provider type: ${provider?.constructor?.name || "Unknown"}`);
+      }
 
       const count = await strapi.entityService.count("api::section.section");
 
