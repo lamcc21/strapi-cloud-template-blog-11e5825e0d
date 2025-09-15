@@ -1,25 +1,33 @@
-export default ({ env }) => [
+export default [
   "strapi::logger",
   "strapi::errors",
   {
     name: "strapi::security",
     config: {
       contentSecurityPolicy: {
+        useDefaults: true,
         directives: {
-          "script-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
+          "connect-src": ["'self'", "https:"],
           "img-src": [
             "'self'",
             "data:",
             "blob:",
-            "cdn.jsdelivr.net",
-            "strapi.io",
-            `${env("AWS_BUCKET")}.s3.${env("AWS_REGION")}.amazonaws.com`,
-            `${env("AWS_CDN")}`,
+            "market-assets.strapi.io",
+            "orchestral-dev-website-s3-assets.s3.ap-southeast-2.amazonaws.com",
           ],
+          "media-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "market-assets.strapi.io",
+            "orchestral-dev-website-s3-assets.s3.ap-southeast-2.amazonaws.com",
+          ],
+          upgradeInsecureRequests: null,
         },
       },
     },
   },
+
   "strapi::cors",
   "strapi::poweredBy",
   "strapi::query",
