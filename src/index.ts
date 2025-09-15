@@ -29,7 +29,7 @@ export default {
       );
 
       // Check the actual config from strapi.config
-      const pluginConfig = strapi.config.get("plugin.upload") as any;
+      const pluginConfig = strapi.config.get("plugin::upload") as any;
       strapi.log.info(
         `Upload config provider: ${pluginConfig?.config?.provider}`,
       );
