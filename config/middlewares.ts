@@ -12,6 +12,7 @@ export default [
             "'self'",
             "data:",
             "blob:",
+            "market-assets.strapi.io",
             "https://d2av3tf6hatjqz.cloudfront.net",
           ],
           "media-src": [
