@@ -1,4 +1,4 @@
-export default [
+export default ({ env }) => [
   "strapi::logger",
   "strapi::errors",
   {
@@ -12,21 +12,21 @@ export default [
             "'self'",
             "data:",
             "blob:",
-            "https://d2av3tf6hatjqz.cloudfront.net",
+            "market-assets.strapi.io",
+            env("AWS_CDN"),
           ],
           "media-src": [
             "'self'",
             "data:",
             "blob:",
             "market-assets.strapi.io",
-            "https://d2av3tf6hatjqz.cloudfront.net",
+            env("AWS_CDN"),
           ],
           upgradeInsecureRequests: null,
         },
       },
     },
   },
-
   "strapi::cors",
   "strapi::poweredBy",
   "strapi::query",
